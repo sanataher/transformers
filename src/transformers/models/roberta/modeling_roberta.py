@@ -1220,7 +1220,7 @@ class RobertaForSequenceClassification(RobertaPreTrainedModel):
                     self.config.problem_type = "multi_label_classification"
 
             if self.config.problem_type == "regression":
-                loss_fct = L1Loss()
+                loss_fct = MSELoss()
                 if self.num_labels == 1:
                     loss = loss_fct(logits.squeeze(), labels.squeeze())
                 else:
@@ -1438,6 +1438,7 @@ class RobertaClassificationHead(nn.Module):
         x = self.dropout(x)
         x = self.dense(x)
         x = torch.tanh(x)
+        x = self.dense(x) #sana
         x = self.dropout(x)
         x = self.out_proj(x)
         return x
