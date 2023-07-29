@@ -1159,7 +1159,7 @@ class RobertaForSequenceClassification(RobertaPreTrainedModel):
         self.config = config
 
         self.roberta = RobertaModel(config, add_pooling_layer=False)
-        self.classifier = RobertaClassificationHead(config)
+        self.classifier = Ridge(alpha==1e-3, fit-intercept=True)
 
         # Initialize weights and apply final processing
         self.post_init()
@@ -1437,7 +1437,6 @@ class RobertaClassificationHead(nn.Module):
         x = features[:, 0, :]  # take <s> token (equiv. to [CLS])
         x = self.dropout(x)
         x = self.dense(x)
-        x = self.dense(x) #sana
         x = torch.tanh(x)
         x = self.dropout(x)
         x = self.out_proj(x)
