@@ -1159,7 +1159,7 @@ class RobertaForSequenceClassification(RobertaPreTrainedModel):
         self.config = config
 
         self.roberta = RobertaModel(config, add_pooling_layer=False)
-        self.classifier = Ridge(alpha==1e-3, fit-intercept=True)
+        self.classifier = RobertaClassificationHead(config)
 
         # Initialize weights and apply final processing
         self.post_init()
