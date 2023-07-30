@@ -573,7 +573,7 @@ class RobertaPooler(nn.Module):
     def __init__(self, config):
         super().__init__()
         self.dense = nn.Linear(config.hidden_size, config.hidden_size)
-        self.activation = nn.Tanh()
+        self.activation = nn.()
 
     def forward(self, hidden_states: torch.Tensor) -> torch.Tensor:
         # We "pool" the model by simply taking the hidden state corresponding
@@ -1437,7 +1437,7 @@ class RobertaClassificationHead(nn.Module):
         x = features[:, 0, :]  # take <s> token (equiv. to [CLS])
         x = self.dropout(x)
         x = self.dense(x)
-        x = torch.tanh(x)
+        x = torch.ReLU(x) #sana
         x = self.dropout(x)
         x = self.out_proj(x)
         return x
