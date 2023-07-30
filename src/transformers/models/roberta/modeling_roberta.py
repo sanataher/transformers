@@ -1437,7 +1437,7 @@ class RobertaClassificationHead(nn.Module):
         x = features[:, 0, :]  # take <s> token (equiv. to [CLS])
         x = self.dropout(x)
         x = self.dense(x)
-        relu = nn.ReLU()#sana
+        relu = nn.ReLU(True)#sana
         x = relu(x) #sana
         x = self.dropout(x)
         x = self.out_proj(x)
