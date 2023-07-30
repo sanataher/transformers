@@ -21,7 +21,7 @@ from typing import List, Optional, Tuple, Union
 import torch
 import torch.utils.checkpoint
 from torch import nn
-from torch.nn import BCEWithLogitsLoss, CrossEntropyLoss, MSELoss, L1Loss
+from torch.nn import BCEWithLogitsLoss, CrossEntropyLoss, MSELoss, L1Loss, ReLU
 
 from ...activations import ACT2FN, gelu
 from ...modeling_outputs import (
@@ -1437,7 +1437,8 @@ class RobertaClassificationHead(nn.Module):
         x = features[:, 0, :]  # take <s> token (equiv. to [CLS])
         x = self.dropout(x)
         x = self.dense(x)
-        x = nn.ReLU(x) #sana
+        relu = torch.nn.ReLU()#sana
+        x = relu(x) #sana
         x = self.dropout(x)
         x = self.out_proj(x)
         return x
