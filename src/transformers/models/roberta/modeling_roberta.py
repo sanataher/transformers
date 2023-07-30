@@ -1437,7 +1437,7 @@ class RobertaClassificationHead(nn.Module):
         x = features[:, 0, :]  # take <s> token (equiv. to [CLS])
         x = self.dropout(x)
         x = self.dense(x)
-        x = torch.ReLU(x) #sana
+        x = torch.nn.ReLU(x) #sana
         x = self.dropout(x)
         x = self.out_proj(x)
         return x
